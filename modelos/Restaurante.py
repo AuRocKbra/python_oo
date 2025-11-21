@@ -23,9 +23,9 @@ class Restaurante:
     '''
     @classmethod
     def listar_restaurantes(cls):
-        print(f'{'Nome do restaurante'.ljust(25)} | {'Categoria'.ljust(25)} | {'Status'}')
+        print(f'{'Nome do restaurante'.ljust(25)} | {'Categoria'.ljust(25)} | {'Avaliação'.ljust(25)} | {'Status'}')
         for restaurante in cls.restaurantes:
-            print(f'{restaurante._nome.ljust(25)} | {restaurante._categoria.ljust(25)} | Ativo: {restaurante.ativo}')
+            print(f'{restaurante._nome.ljust(25)} | {restaurante._categoria.ljust(25)} | {str(restaurante.resultado_avaliacoes).ljust(25)} | Ativo: {restaurante.ativo} ')
 
     @property
     def ativo(self):
@@ -35,5 +35,16 @@ class Restaurante:
         self._ativo = not self._ativo
 
     def receber_avaliacao(self, nome, nota):
-        avaliacao = Avaliacao(nome, nota)
+        nota_ajustada = 5 if nota > 5 else 0 if nota < 0 else nota
+        avaliacao = Avaliacao(nome, nota_ajustada)
         self._avaliacoes.append(avaliacao)
+
+    """
+    Função que calcula a média das notas dos restaurantes. 
+    A função é marcada como propriedade da classe Restaurante, para permitir que seja acessada pela instancia da classe como um atributo.
+    """
+    @property
+    def resultado_avaliacoes(self):
+        if not self._avaliacoes:
+            return '-'
+        return round(sum(avalicao._nota for avalicao in self._avaliacoes) / len(self._avaliacoes),1)

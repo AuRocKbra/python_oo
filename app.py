@@ -3,9 +3,13 @@ from modelos.Restaurante import Restaurante #Forma de importação de uma class
 Declaração dos objetos
 """
 restaurante_praca = Restaurante('Praça','Gourmet')
+restaurante_pizza = Restaurante('Pizza Hut','Fast Food')
 restaurante_praca.receber_avaliacao('Luiz', 5.0)
 restaurante_praca.receber_avaliacao('Maria', 4.0)
 restaurante_praca.receber_avaliacao('Alice',10)
+restaurante_praca.receber_avaliacao('Carlos', -1)
+restaurante_praca.receber_avaliacao('Ana', 7)
+restaurante_praca.receber_avaliacao('Luiza',10)
 
 """
 Arquivo principal do projeto
